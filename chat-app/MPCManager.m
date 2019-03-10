@@ -12,19 +12,19 @@
 
 @synthesize delegate;
 
-- (id)init {
+- (id)initWithDisplayName:(NSString *)displayName andServiceType:(NSString *)serviceType {
     self = [super init];
     
     if (self) {
-        _peerID = [[MCPeerID alloc] initWithDisplayName:[[UIDevice currentDevice] name]];
+        _peerID = [[MCPeerID alloc] initWithDisplayName:displayName];
         
         _session = [[MCSession alloc] initWithPeer:_peerID];
         _session.delegate = self;
         
-        _browser = [[MCNearbyServiceBrowser alloc] initWithPeer:_peerID serviceType:@"jeantimex-chat-app"];
+        _browser = [[MCNearbyServiceBrowser alloc] initWithPeer:_peerID serviceType:serviceType];
         _browser.delegate = self;
         
-        _advertiser = [[MCNearbyServiceAdvertiser alloc] initWithPeer:_peerID discoveryInfo:nil serviceType:@"jeantimex-chat-app"];
+        _advertiser = [[MCNearbyServiceAdvertiser alloc] initWithPeer:_peerID discoveryInfo:nil serviceType:serviceType];
         _advertiser.delegate = self;
         
         _foundPeers = [[NSMutableArray alloc] init];
@@ -117,7 +117,7 @@
 # pragma mark - Public method implementation
 
 - (BOOL)sendData:(NSDictionary *)dictionary toPeer:(MCPeerID *)peerID {
-    NSData *dataToSend = [NSKeyedArchiver archivedDataWithRootObject:dictionary];
+    NSData *dataToSend = [NSKeyedArchiver archivedDataWithRootObject:dictionary requiringSecureCoding:NO error:nil];
     NSArray *peers = [[NSArray alloc] initWithObjects:peerID, nil];
     NSError *error = nil;
     if (![_session sendData:dataToSend toPeers:peers withMode:MCSessionSendDataReliable error:&error]) {
