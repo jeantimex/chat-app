@@ -14,6 +14,7 @@
 		1AAF61DB2230F06800C4060D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1AAF61D92230F06800C4060D /* LaunchScreen.storyboard */; };
 		1AAF61DE2230F06800C4060D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AAF61DD2230F06800C4060D /* main.m */; };
 		1AAF61E62234B21300C4060D /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AAF61E52234B21300C4060D /* GameViewController.m */; };
+		1AAF61E92234B6BD00C4060D /* MPCManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AAF61E82234B6BD00C4060D /* MPCManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +30,8 @@
 		1AAF61DD2230F06800C4060D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		1AAF61E42234B21300C4060D /* GameViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameViewController.h; sourceTree = "<group>"; };
 		1AAF61E52234B21300C4060D /* GameViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameViewController.m; sourceTree = "<group>"; };
+		1AAF61E72234B6BD00C4060D /* MPCManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPCManager.h; sourceTree = "<group>"; };
+		1AAF61E82234B6BD00C4060D /* MPCManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MPCManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +75,8 @@
 				1AAF61DD2230F06800C4060D /* main.m */,
 				1AAF61E42234B21300C4060D /* GameViewController.h */,
 				1AAF61E52234B21300C4060D /* GameViewController.m */,
+				1AAF61E72234B6BD00C4060D /* MPCManager.h */,
+				1AAF61E82234B6BD00C4060D /* MPCManager.m */,
 			);
 			path = "chat-app";
 			sourceTree = "<group>";
@@ -149,6 +154,7 @@
 				1AAF61E62234B21300C4060D /* GameViewController.m in Sources */,
 				1AAF61D32230F06700C4060D /* ViewController.m in Sources */,
 				1AAF61DE2230F06800C4060D /* main.m in Sources */,
+				1AAF61E92234B6BD00C4060D /* MPCManager.m in Sources */,
 				1AAF61D02230F06700C4060D /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
