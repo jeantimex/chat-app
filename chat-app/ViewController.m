@@ -19,5 +19,8 @@
     // Do any additional setup after loading the view, typically from a nib.
 }
 
+- (IBAction)onGameBtnClicked:(UIButton *)sender {
+    [self performSegueWithIdentifier:@"startGame" sender:self];
+}
 
 @end

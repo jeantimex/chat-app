@@ -10,6 +10,7 @@
 
 @interface ViewController : UIViewController
 
+- (IBAction)onGameBtnClicked:(UIButton *)sender;
 
 @end
 
