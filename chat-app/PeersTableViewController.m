@@ -56,39 +56,11 @@
     return cell;
 }
 
-/*
- // Override to support conditional editing of the table view.
- - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
- // Return NO if you do not want the specified item to be editable.
- return YES;
- }
- */
-
-/*
- // Override to support editing the table view.
- - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
- if (editingStyle == UITableViewCellEditingStyleDelete) {
- // Delete the row from the data source
- [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
- } else if (editingStyle == UITableViewCellEditingStyleInsert) {
- // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
- }
- }
- */
-
-/*
- // Override to support rearranging the table view.
- - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
- }
- */
-
-/*
- // Override to support conditional rearranging of the table view.
- - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
- // Return NO if you do not want the item to be re-orderable.
- return YES;
- }
- */
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    MCPeerID *selectedPeer = (MCPeerID *)_appDelegate.mpcManager.foundPeers[indexPath.row];
+    
+    [_appDelegate.mpcManager.browser invitePeer:selectedPeer toSession:_appDelegate.mpcManager.session withContext:nil timeout:20];
+}
 
 /*
  #pragma mark - Navigation
@@ -100,16 +72,42 @@
  }
  */
 
-- (void)connectedWithPeer:(MCPeerID *)peerID {
-    
-}
-
 - (void)foundPeer:(MCPeerID *)peerID {
     [self.tableView reloadData];
 }
 
 - (void)invitationWasReceived:(MCPeerID *)peerID {
+    NSString *fromPeer = [peerID displayName];
+    NSString *message = [NSString stringWithFormat:@"%@ wants to chat with you", fromPeer];
+    UIAlertController *alert = [UIAlertController
+                                alertControllerWithTitle:@""
+                                message:message
+                                preferredStyle:UIAlertControllerStyleAlert];
     
+    UIAlertAction* acceptButton = [UIAlertAction
+                                     actionWithTitle:@"Accept"
+                                     style:UIAlertActionStyleDefault
+                                     handler:^(UIAlertAction * action) {
+                                         self->_appDelegate.mpcManager.invitationHandler(YES, self->_appDelegate.mpcManager.session);
+                                     }];
+    
+    UIAlertAction* declineButton = [UIAlertAction
+                                 actionWithTitle:@"Cancel"
+                                 style:UIAlertActionStyleCancel
+                                 handler:^(UIAlertAction * action) {
+                                     self->_appDelegate.mpcManager.invitationHandler(NO, nil);
+                                 }];
+    
+    [alert addAction:acceptButton];
+    [alert addAction: declineButton];
+    
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
+- (void)connectedWithPeer:(MCPeerID *)peerID {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self performSegueWithIdentifier:@"startGame" sender:self];
+    });
 }
 
 - (void)lostPeer:(MCPeerID *)peerID {
