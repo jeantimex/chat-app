@@ -17,6 +17,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    NSString *displayName = [UIDevice currentDevice].name;
+    _mpcManager = [[MPCManager alloc] initWithDisplayName:displayName andServiceType:@"chatapp"];
     return YES;
 }
 

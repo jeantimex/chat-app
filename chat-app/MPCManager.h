@@ -39,6 +39,7 @@
 //  Public Methods
 //
 
+- (id)initWithDisplayName:(NSString *)displayName andServiceType:(NSString *)serviceType;
 - (BOOL)sendData:(NSDictionary *)data toPeer:(MCPeerID *)peerID;
 
 @end

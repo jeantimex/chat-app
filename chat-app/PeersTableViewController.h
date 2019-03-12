@@ -7,7 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AppDelegate.h"
+#import "MPCManager.h"
 
-@interface PeersTableViewController : UITableViewController
+@interface PeersTableViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate, MPCManagerDelegate>
+
+@property (strong, nonatomic) AppDelegate *appDelegate;
+
+@property (assign, nonatomic) BOOL isAdvertising;
 
 @end
