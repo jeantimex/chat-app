@@ -28,6 +28,9 @@
         _advertiser.delegate = self;
         
         _foundPeers = [[NSMutableArray alloc] init];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appWillResignActive:) name:UIApplicationWillResignActiveNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appWillTerminate:) name:UIApplicationWillTerminateNotification object:nil];
     }
     
     return self;
@@ -124,6 +127,17 @@
         return NO;
     }
     return YES;
+}
+
+# pragma mark - Inactive and Terminate
+
+- (void)appWillResignActive:(NSNotification*)notification {
+    
+}
+
+- (void)appWillTerminate:(NSNotification*)notification {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationWillResignActiveNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationWillTerminateNotification object:nil];
 }
 
 @end
