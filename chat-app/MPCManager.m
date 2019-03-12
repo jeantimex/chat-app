@@ -132,12 +132,18 @@
 # pragma mark - Inactive and Terminate
 
 - (void)appWillResignActive:(NSNotification*)notification {
-    
+    [self disconnect];
 }
 
 - (void)appWillTerminate:(NSNotification*)notification {
+    [self disconnect];
+
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationWillResignActiveNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationWillTerminateNotification object:nil];
+}
+
+- (void)disconnect {
+    [_session disconnect];
 }
 
 @end
